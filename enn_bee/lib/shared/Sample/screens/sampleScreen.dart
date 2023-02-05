@@ -18,7 +18,7 @@ class DefaultStatelessPage extends StatelessWidget {
           child: Icon(Icons.add),
           onPressed: sampleC.increment),
       appBar: AppBar(
-        title: const Text("home"),
+        title: Text("home".tr),
       ),
       body: Obx(
         () => Center(
