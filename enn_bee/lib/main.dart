@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:enn_bee/config/environments.dart';
 import 'package:enn_bee/routes/pageRoutes.dart';
 import 'package:enn_bee/utils/stylesheet/values/strings.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +15,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    boot(env: Env.prod);
     return GetMaterialApp(
       title: 'Flutter Demo',
       //translations: Strings(), // your translations

@@ -11,6 +11,7 @@ class DefaultStatelessPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final SampleController sampleC = Get.put(SampleController());
+
     SizeConfig().init(context);
     return Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -31,8 +32,10 @@ class DefaultStatelessPage extends StatelessWidget {
               children: [
                 Text(sampleC.name.string),
                 ElevatedButton(
-                    child: Text("Change Name"),
-                    onPressed: () => sampleC.changeName("deby"))
+                    child: Text("Get User"),
+                    onPressed: () {
+                      sampleC.getUser(id: 2);
+                    })
               ],
             ),
           ),
