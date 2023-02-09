@@ -23,17 +23,16 @@ class DefaultStatelessPage extends StatelessWidget {
       body: Obx(
         () => Center(
           child: Container(
-            color: AppColors.grey,
+            //color: AppColors.grey,
             width: SizeConfig.widthOf(50),
             height: SizeConfig.heightOf(20),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text(sampleC.count.string),
+                Text(sampleC.name.string),
                 ElevatedButton(
-                    child: Text("Go to Other"),
-                    onPressed: () => Get.toNamed('/second',
-                        arguments: {"name": "Total Count"}))
+                    child: Text("Change Name"),
+                    onPressed: () => sampleC.changeName("deby"))
               ],
             ),
           ),
