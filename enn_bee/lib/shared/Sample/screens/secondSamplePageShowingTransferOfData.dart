@@ -24,7 +24,6 @@ class _SecondPageState extends State<SecondPage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Container(child: Text(sampleC.count.string)),
           Container(child: Text(argumentData["name"])),
         ],
       ),

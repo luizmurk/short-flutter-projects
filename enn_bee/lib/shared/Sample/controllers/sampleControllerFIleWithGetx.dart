@@ -11,11 +11,8 @@ class SampleController extends GetxController {
   EnvironmentConfig envConf = Get.find<EnvironmentConfig>();
   final ApiServicesSample apiC = Get.put(ApiServicesSample());
   late SampleUserModel? user;
-  var count = 0.obs;
+  var loading = false.obs;
   var name = "will".obs;
-  var age = 25.obs;
-  var baseUrl;
-  increment() => count++;
 
   changeName(newName) {
     envConf.getBASEURL;
@@ -30,7 +27,9 @@ class SampleController extends GetxController {
   }
 
   getUser({id}) async {
+    loading(true);
     apiC.makeGetUserRequest(id: id).then((value) {
+      loading(false);
       print(value?.firstName);
       return name(value?.firstName);
     });

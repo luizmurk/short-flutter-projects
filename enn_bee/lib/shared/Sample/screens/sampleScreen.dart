@@ -14,10 +14,6 @@ class DefaultStatelessPage extends StatelessWidget {
 
     SizeConfig().init(context);
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-          // ignore: sort_child_properties_last
-          child: Icon(Icons.add),
-          onPressed: sampleC.increment),
       appBar: AppBar(
         title: Text("home".tr),
       ),
@@ -31,11 +27,13 @@ class DefaultStatelessPage extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(sampleC.name.string),
-                ElevatedButton(
-                    child: Text("Get User"),
-                    onPressed: () {
-                      sampleC.getUser(id: 2);
-                    })
+                !sampleC.loading.value
+                    ? ElevatedButton(
+                        child: Text("Get User"),
+                        onPressed: () {
+                          sampleC.getUser(id: 2);
+                        })
+                    : Text("Loading...")
               ],
             ),
           ),
