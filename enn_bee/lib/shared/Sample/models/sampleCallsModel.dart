@@ -1,6 +1,6 @@
 class SampleUserModel {
-  int id;
-  String firstName, lastName, email, avatar;
+  int? id;
+  String? firstName, lastName, email, avatar;
 
   SampleUserModel(
       {required this.id,
@@ -31,31 +31,41 @@ class SampleUserModel {
     return res;
   }
 
-  // Map<String, dynamic> toJson() {
-  //   final Map<String, dynamic> data = new Map<String, dynamic>();
-  //   data['date'] = this.date;
-  //   data['data'] = this.data;
-  //   return data;
-  // }
-
   //int get length => mockModels.length;
   static List<SampleUserModel> getMockUsers() {
     return mockModels;
   }
 }
 
-class UpcomingPaymentDataModel {
-  String amount, reason;
-  bool isStandingOrder, isDirectDebit, isCredit, isDebit;
+class SampleUserPostModel {
+  int? userId;
+  int? id;
+  String? title;
+  String? body;
 
-  UpcomingPaymentDataModel({
-    required this.amount,
-    required this.reason,
-    required this.isCredit,
-    required this.isDebit,
-    required this.isStandingOrder,
-    required this.isDirectDebit,
-  });
+  SampleUserPostModel({this.userId, this.id, this.title, this.body});
+
+  SampleUserPostModel.fromJson(Map<String, dynamic> json) {
+    userId = json['userId'];
+    id = json['id'];
+    title = json['title'];
+    body = json['body'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['userId'] = this.userId;
+    data['id'] = this.id;
+    data['title'] = this.title;
+    data['body'] = this.body;
+    return data;
+  }
 }
 
 List<SampleUserModel> mockModels = [];
+
+SampleUserPostModel mockPost = SampleUserPostModel(
+    userId: 1, title: "Gai Weight", body: "i gained weight");
+
+SampleUserPostModel mockPatchedPost =
+    SampleUserPostModel(id: 1, userId: 1, body: "i gained weight");

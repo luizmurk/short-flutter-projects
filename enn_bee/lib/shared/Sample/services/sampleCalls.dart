@@ -28,26 +28,87 @@ class ApiServicesSample extends GetxController {
 
   Future<SampleUserModel?> makeGetUserRequest({id}) async {
     var url = "${envConf.getBASEURL}${getUser}$id";
-    url;
     SampleUserModel? user;
     try {
       var res = await _dio.get(url);
       user = SampleUserModel.fromJson(res.data["data"]);
     } on DioError catch (e) {
-      // The request was made and the server responded with a status code
-      // that falls out of the range of 2xx and is also not 304.
       if (e.response != null) {
         print('Dio error!');
-        print('STATUS: ${e.response?.statusCode}');
-        print('DATA: ${e.response?.data}');
-        print('HEADERS: ${e.response?.headers}');
       } else {
-        // Error due to setting up or sending the request
         print('Error sending request!');
         print(e.message);
       }
     }
+    return user;
+  }
+
+  Future<SampleUserPostModel?> makePostUserRequest(
+      {id, SampleUserPostModel? data}) async {
+    var url = "${envConf.getBASEURL2}${postUser}";
+    var jsonData = data?.toJson();
+    SampleUserPostModel? user;
+
+    try {
+      var res = await _dio.post(url, data: jsonData);
+      print(res);
+      user = SampleUserPostModel.fromJson(res.data);
+    } on DioError catch (e) {
+      if (e.response != null) {
+        print('Dio error!');
+      } else {}
+    }
     print(user);
     return user;
+  }
+
+  Future<SampleUserPostModel?> makePutUserRequest(
+      {id, SampleUserPostModel? data}) async {
+    var url = "${envConf.getBASEURL2}${putUser}";
+    var jsonData = data?.toJson();
+    SampleUserPostModel? user;
+
+    try {
+      var res = await _dio.put(url, data: jsonData);
+      print(res);
+      user = SampleUserPostModel.fromJson(res.data);
+    } on DioError catch (e) {
+      if (e.response != null) {
+      } else {}
+    }
+    print(user);
+    return user;
+  }
+
+  Future<SampleUserPostModel?> makePatchUserRequest(
+      {id, SampleUserPostModel? data}) async {
+    var url = "${envConf.getBASEURL2}${putUser}";
+    var jsonData = data?.toJson();
+    SampleUserPostModel? user;
+
+    try {
+      var res = await _dio.patch(url, data: jsonData);
+      print(res);
+      user = SampleUserPostModel.fromJson(res.data);
+    } on DioError catch (e) {
+      if (e.response != null) {
+      } else {}
+    }
+    print(user);
+    return user;
+  }
+
+  Future<bool> makeDeleteUserRequest({id}) async {
+    var url = "${envConf.getBASEURL2}${deleteUser}${id}";
+
+    try {
+      var res = await _dio.delete(url);
+      print("success");
+    } on DioError catch (e) {
+      print("failed");
+      if (e.response != null) {
+      } else {}
+    }
+    return true;
   }
 }

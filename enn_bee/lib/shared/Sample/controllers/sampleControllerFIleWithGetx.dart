@@ -34,4 +34,39 @@ class SampleController extends GetxController {
       return name(value?.firstName);
     });
   }
+
+  postUser({id, SampleUserPostModel? data}) async {
+    loading(true);
+    apiC.makePostUserRequest(id: id, data: mockPost).then((value) {
+      loading(false);
+      print(value?.title);
+      //return value;
+    });
+  }
+
+  putUser({id, SampleUserPostModel? data}) async {
+    loading(true);
+    apiC.makePutUserRequest(id: id, data: mockPost).then((value) {
+      loading(false);
+      print(value?.title);
+      //return value;
+    });
+  }
+
+  patchUser({id, SampleUserPostModel? data}) async {
+    loading(true);
+    apiC.makePatchUserRequest(id: id, data: mockPatchedPost).then((value) {
+      loading(false);
+      print(value?.title);
+      //return value;
+    });
+  }
+
+  deleteUser({id}) async {
+    loading(true);
+    apiC.makeDeleteUserRequest(id: id).then((value) {
+      loading(false);
+      //return value;
+    });
+  }
 }

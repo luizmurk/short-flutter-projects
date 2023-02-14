@@ -33,6 +33,13 @@ class DefaultStatelessPage extends StatelessWidget {
                         onPressed: () {
                           sampleC.getUser(id: 2);
                         })
+                    : Text("Loading..."),
+                !sampleC.loading.value
+                    ? ElevatedButton(
+                        child: Text("Post User"),
+                        onPressed: () {
+                          sampleC.deleteUser(id: 1);
+                        })
                     : Text("Loading...")
               ],
             ),
