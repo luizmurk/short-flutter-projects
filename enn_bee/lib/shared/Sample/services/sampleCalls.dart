@@ -1,4 +1,6 @@
-// ignore_for_file: unnecessary_brace_in_string_interps, prefer_const_declarations, unused_local_variable
+// ignore_for_file: unnecessary_brace_in_string_interps, prefer_const_declarations, unused_local_variable, avoid_print
+
+import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:enn_bee/config/environments.dart';
@@ -6,6 +8,9 @@ import 'package:enn_bee/server-side/apiEndpoints.dart';
 import 'package:enn_bee/shared/Sample/models/sampleCallsModel.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:http/http.dart' as http;
+
+import '../../../server-side/sharedServices.dart';
 
 class ApiServicesSample extends GetxController {
   static EnvironmentConfig envConf = Get.find<EnvironmentConfig>();
@@ -27,19 +32,10 @@ class ApiServicesSample extends GetxController {
   }
 
   Future<SampleUserModel?> makeGetUserRequest({id}) async {
-    var url = "${envConf.getBASEURL}${getUser}$id";
     SampleUserModel? user;
-    try {
-      var res = await _dio.get(url);
-      user = SampleUserModel.fromJson(res.data["data"]);
-    } on DioError catch (e) {
-      if (e.response != null) {
-        print('Dio error!');
-      } else {
-        print('Error sending request!');
-        print(e.message);
-      }
-    }
+    var url = "${envConf.getBASEURL}${getUser}$id";
+    var res = await InternetServices.initialiseGetRequest(url: url);
+    user = SampleUserModel.fromJson(res["data"]);
     return user;
   }
 
@@ -48,16 +44,10 @@ class ApiServicesSample extends GetxController {
     var url = "${envConf.getBASEURL2}${postUser}";
     var jsonData = data?.toJson();
     SampleUserPostModel? user;
-
-    try {
-      var res = await _dio.post(url, data: jsonData);
-      print(res);
-      user = SampleUserPostModel.fromJson(res.data);
-    } on DioError catch (e) {
-      if (e.response != null) {
-        print('Dio error!');
-      } else {}
-    }
+    var res =
+        await InternetServices.initialisePostRequest(url: url, data: jsonData);
+    print(res);
+    user = SampleUserPostModel.fromJson(res);
     print(user);
     return user;
   }
@@ -68,14 +58,11 @@ class ApiServicesSample extends GetxController {
     var jsonData = data?.toJson();
     SampleUserPostModel? user;
 
-    try {
-      var res = await _dio.put(url, data: jsonData);
-      print(res);
-      user = SampleUserPostModel.fromJson(res.data);
-    } on DioError catch (e) {
-      if (e.response != null) {
-      } else {}
-    }
+    var res =
+        await InternetServices.initialisePutRequest(url: url, data: jsonData);
+    print(res);
+    user = SampleUserPostModel.fromJson(res);
+
     print(user);
     return user;
   }
@@ -86,14 +73,11 @@ class ApiServicesSample extends GetxController {
     var jsonData = data?.toJson();
     SampleUserPostModel? user;
 
-    try {
-      var res = await _dio.patch(url, data: jsonData);
-      print(res);
-      user = SampleUserPostModel.fromJson(res.data);
-    } on DioError catch (e) {
-      if (e.response != null) {
-      } else {}
-    }
+    var res =
+        await InternetServices.initialisePatchRequest(url: url, data: jsonData);
+    print(res);
+    user = SampleUserPostModel.fromJson(res);
+
     print(user);
     return user;
   }
@@ -101,14 +85,9 @@ class ApiServicesSample extends GetxController {
   Future<bool> makeDeleteUserRequest({id}) async {
     var url = "${envConf.getBASEURL2}${deleteUser}${id}";
 
-    try {
-      var res = await _dio.delete(url);
-      print("success");
-    } on DioError catch (e) {
-      print("failed");
-      if (e.response != null) {
-      } else {}
-    }
+    var res = await InternetServices.initialiseDeleteRequest(url: url);
+    print("success");
+
     return true;
   }
 }

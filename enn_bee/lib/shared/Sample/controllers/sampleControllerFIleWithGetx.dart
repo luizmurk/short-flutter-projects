@@ -37,7 +37,7 @@ class SampleController extends GetxController {
 
   postUser({id, SampleUserPostModel? data}) async {
     loading(true);
-    apiC.makePostUserRequest(id: id, data: mockPost).then((value) {
+    apiC.makePostUserRequest(id: id, data: data).then((value) {
       loading(false);
       print(value?.title);
       //return value;

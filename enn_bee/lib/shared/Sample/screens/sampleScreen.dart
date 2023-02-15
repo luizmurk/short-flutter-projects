@@ -5,12 +5,15 @@ import 'package:enn_bee/utils/stylesheet/values/values.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../config/loader.dart';
+
 class DefaultStatelessPage extends StatelessWidget {
   const DefaultStatelessPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final SampleController sampleC = Get.put(SampleController());
+    LoaderConfig loader = Get.put(LoaderConfig(loader: Loader.api));
 
     SizeConfig().init(context);
     return Scaffold(
@@ -33,14 +36,14 @@ class DefaultStatelessPage extends StatelessWidget {
                         onPressed: () {
                           sampleC.getUser(id: 2);
                         })
-                    : Text("Loading..."),
+                    : loader.getLoader,
                 !sampleC.loading.value
                     ? ElevatedButton(
                         child: Text("Post User"),
                         onPressed: () {
                           sampleC.deleteUser(id: 1);
                         })
-                    : Text("Loading...")
+                    : loader.getLoader
               ],
             ),
           ),
