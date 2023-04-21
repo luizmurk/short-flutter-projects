@@ -28,16 +28,14 @@ const CRUDService: ICRUDService = {
                     data:dataSample,
                     message: "succesfully added",
                 } as ICRUDResponse;
-            }else{
-                return {
-                    data:otherDataSample,
-                    message: "succesfully added",
-                } as ICRUDResponse;
+            }
+            else{
+                throw new Error();
             }
             
         }
         catch{
-            throw new Error("Function not implemented.");
+            throw new Error("empty");
         }
     },
     async  delete(id: string): Promise<ICRUDResponse> {

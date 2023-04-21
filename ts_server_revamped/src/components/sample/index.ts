@@ -63,11 +63,8 @@ export const newReq =  async function getAll(
         message: "You successfully read the data",
       });
     } catch (error: any) {
-      if (error.code === 500) {
-        return ;
-      }
       res.status(400).json({
-        status: 400,
+        status: res.statusCode,
         message: error.message,
       });
     } finally {

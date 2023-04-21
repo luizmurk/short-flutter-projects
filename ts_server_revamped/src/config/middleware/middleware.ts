@@ -1,5 +1,6 @@
 import * as bodyParser from 'body-parser';
 import * as express from 'express';
+import { erroHandler } from './errorHandler';
 
 /**
  * @export
@@ -11,6 +12,7 @@ export function configure(app: express.Application): void {
         extended: false,
     }));
     app.use(bodyParser.json());
+    app.use(erroHandler);
     // parse Cookie header and populate req.cookies with an object keyed by the cookie names.
 
     // cors

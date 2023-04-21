@@ -8,7 +8,7 @@ import * as Middleware from './config/middleware/middleware';
 
 dotenv.config();
 const app: any = express();
-const port = process.env.PORT || 5001;
+const port = process.env.PORT;
 Middleware.configure(app);
 Routes.init(app);
 
