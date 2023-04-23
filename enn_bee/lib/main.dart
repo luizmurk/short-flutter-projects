@@ -1,11 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:enn_bee/routes/pageRoutes.dart';
-import 'package:enn_bee/utils/stylesheet/values/strings.dart';
+import 'package:enn_bee/utils/stylesheet/values/values.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'utils/stylesheet/values/values.dart';
 
 void main() => runApp(MyApp());
 
@@ -14,6 +12,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppColors.init(Mode.dark);
     return GetMaterialApp(
       title: 'Flutter Demo',
       //translations: Strings(), // your translations
@@ -21,7 +20,7 @@ class MyApp extends StatelessWidget {
           Locale('fr', 'CH'), // translations will be displayed in that locale
       fallbackLocale: Locale('fr', 'CH'),
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.red,
       ),
       initialRoute: '/',
       getPages: UserRoutes,
